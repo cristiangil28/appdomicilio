@@ -1,0 +1,69 @@
+﻿@model IEnumerable<DataLayer.Pedidos>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre_recibe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.observacion_pedido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.observacion_producto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_productos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.valor_total)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Clientes.cedula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Productos.plu)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre_recibe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.observacion_pedido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.observacion_producto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_productos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.valor_total)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Clientes.cedula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Productos.plu)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_pedido }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_pedido }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_pedido })
+        </td>
+    </tr>
+}
+
+</table>

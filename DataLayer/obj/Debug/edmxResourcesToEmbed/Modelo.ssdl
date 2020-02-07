@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="pedidosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="cedula" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="nombres" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="telefono" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="direccion" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="ciudad" Type="varchar" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pedidos">
+    <Key>
+      <PropertyRef Name="id_pedido" />
+    </Key>
+    <Property Name="id_pedido" Type="int" Nullable="false" />
+    <Property Name="nombre_recibe" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="observacion_pedido" Type="text" Nullable="false" />
+    <Property Name="observacion_producto" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="total_productos" Type="int" Nullable="false" />
+    <Property Name="valor_total" Type="float" Nullable="false" />
+    <Property Name="id_producto" Type="int" />
+    <Property Name="id_cliente" Type="int" />
+  </EntityType>
+  <EntityType Name="Productos">
+    <Key>
+      <PropertyRef Name="id_producto" />
+    </Key>
+    <Property Name="id_producto" Type="int" Nullable="false" />
+    <Property Name="plu" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="marca" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="cantidad_disponible" Type="int" Nullable="false" />
+    <Property Name="valor" Type="int" Nullable="false" />
+    <Property Name="iva" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Pedidos__id_clie__286302EC">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Pedidos">
+        <PropertyRef Name="id_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pedidos__id_prod__276EDEB3">
+    <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+    <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Productos">
+        <PropertyRef Name="id_producto" />
+      </Principal>
+      <Dependent Role="Pedidos">
+        <PropertyRef Name="id_producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="pedidosModelStoreContainer">
+    <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Pedidos__id_clie__286302EC" Association="Self.FK__Pedidos__id_clie__286302EC">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Pedidos" EntitySet="Pedidos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Pedidos__id_prod__276EDEB3" Association="Self.FK__Pedidos__id_prod__276EDEB3">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="Pedidos" EntitySet="Pedidos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
